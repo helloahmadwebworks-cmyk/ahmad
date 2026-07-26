@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { mainServices, citiesList, industriesList, siteConfig } from '@/data/siteData';
+import { mainServices, citiesList, industriesList, freeToolsList, siteConfig } from '@/data/siteData';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = siteConfig.baseUrl;
@@ -9,12 +9,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/about',
     '/portfolio',
     '/contact',
+    '/tools',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
-    priority: route === '' ? 1.0 : 0.8,
+    priority: route === '' ? 1.0 : (route === '/tools' ? 0.9 : 0.8),
   }));
+
+  const toolPages = freeToolsList
+    .filter((tool) => tool.isAvailable)
+    .map((tool) => ({
+      url: `${baseUrl}/${tool.slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.9,
+    }));
 
   const servicePages = mainServices.map((service) => ({
     url: `${baseUrl}/${service.slug}`,
@@ -37,5 +47,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticPages, ...servicePages, ...cityPages, ...industryPages];
+  return [...staticPages, ...toolPages, ...servicePages, ...cityPages, ...industryPages];
 }
