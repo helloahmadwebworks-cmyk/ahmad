@@ -60,11 +60,15 @@ export default function WebsiteSpeedSeoCalculatorPage() {
 
         {/* FAQs Section */}
         <div className="pt-12 border-t border-slate-200">
-          <FaqAccordion
-            faqs={toolFaqs}
-            title="Website Audit & Performance FAQs"
-            subtitle="Common questions about optimizing your website speed and Google search rankings."
-          />
+          <div className="text-center max-w-3xl mx-auto mb-8">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
+              Website Audit &amp; Performance FAQs
+            </h2>
+            <p className="text-slate-600 text-sm mt-2">
+              Common questions about optimizing your website speed and Google search rankings.
+            </p>
+          </div>
+          <FaqAccordion items={toolFaqs} />
         </div>
       </div>
     </div>
