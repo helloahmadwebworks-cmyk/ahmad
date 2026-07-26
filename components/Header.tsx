@@ -48,13 +48,12 @@ export const Header: React.FC = () => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
-            {/* Brand Logo */}
-            <Link href="/" className="flex items-center group">
-              <img
-                src="/logo.png"
-                alt="Ahmad Web Works — SEO & Web Studio Logo"
-                className="h-9 sm:h-11 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
-              />
+            {/* Brand Text Logo */}
+            <Link href="/" className="flex items-center group focus:outline-none">
+              <span className="font-extrabold text-xl sm:text-2xl tracking-tight text-slate-900 transition-transform duration-200 group-hover:scale-[1.02]">
+                Ahmad <span className="bg-gradient-to-r from-brand-600 via-blue-600 to-sky-500 bg-clip-text text-transparent">Web Works</span>
+                <span className="text-brand-600 font-black ml-0.5">.</span>
+              </span>
             </Link>
 
             {/* Desktop Navigation */}

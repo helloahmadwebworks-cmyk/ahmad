@@ -10,12 +10,11 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-800">
           {/* Column 1: Brand Info */}
           <div className="lg:col-span-2 space-y-4">
-            <Link href="/" className="flex items-center group">
-              <img
-                src="/logo.png"
-                alt="Ahmad Web Works Logo"
-                className="h-12 w-auto object-contain bg-white rounded-xl p-1.5 shadow-md transition-transform duration-200 group-hover:scale-105"
-              />
+            <Link href="/" className="inline-flex items-center group focus:outline-none">
+              <span className="font-extrabold text-2xl tracking-tight text-white transition-transform duration-200 group-hover:scale-[1.02]">
+                Ahmad <span className="bg-gradient-to-r from-brand-400 via-blue-400 to-sky-400 bg-clip-text text-transparent">Web Works</span>
+                <span className="text-brand-400 font-black ml-0.5">.</span>
+              </span>
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed max-w-md">
               Ahmad Web Works by <strong className="text-slate-200">Mohd Ahmad</strong> is a premier freelance web development, SEO, and digital marketing studio in India. We craft fast-loading, mobile-friendly websites, Shopify stores, and ad campaigns designed to convert visitors into loyal clients.
