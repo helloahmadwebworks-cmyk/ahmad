@@ -1,19 +1,27 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiOutlineX, HiOutlineSparkles, HiOutlineCheck } from 'react-icons/hi';
-import { FaWhatsapp } from 'react-icons/fa';
+import { FaWhatsapp, FaPaperPlane, FaExclamationCircle } from 'react-icons/fa';
 import { siteConfig } from '@/data/siteData';
 
 export const AuditModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => {
   const [websiteUrl, setWebsiteUrl] = useState('');
   const [phone, setPhone] = useState('');
   const [name, setName] = useState('');
+  const [consentChecked, setConsentChecked] = useState(false);
   const [sent, setSent] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleAuditSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!consentChecked) {
+      setErrorMessage('Please consent to the Privacy Policy to request an audit.');
+      return;
+    }
+
     setSent(true);
 
     try {
@@ -27,7 +35,8 @@ export const AuditModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
           from_name: 'Ahmad Web Works Audit Modal',
           name,
           phone,
-          website: websiteUrl
+          website: websiteUrl,
+          consent: 'Agreed to Privacy Policy & Direct Communication'
         })
       });
     } catch (err) {
@@ -89,19 +98,19 @@ export const AuditModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="e.g. Rahul Sharma"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-500 outline-none text-sm"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-500 outline-none text-sm font-medium"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase mb-1">WhatsApp Number *</label>
+                    <label className="block text-xs font-bold text-slate-700 uppercase mb-1">WhatsApp / Phone *</label>
                     <input
                       type="tel"
                       required
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder="e.g. +91 9084326728"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-500 outline-none text-sm"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-500 outline-none text-sm font-medium"
                     />
                   </div>
 
@@ -113,15 +122,39 @@ export const AuditModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
                       value={websiteUrl}
                       onChange={(e) => setWebsiteUrl(e.target.value)}
                       placeholder="e.g. mybusiness.com or Clinic Name"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-500 outline-none text-sm"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-500 outline-none text-sm font-medium"
                     />
+                  </div>
+
+                  {/* MANDATORY CONSENT CHECKBOX */}
+                  <div className="bg-slate-50 p-3 rounded-xl border border-slate-200/90 space-y-1">
+                    <div className="flex items-start gap-2.5">
+                      <input
+                        type="checkbox"
+                        id="modalConsent"
+                        required
+                        checked={consentChecked}
+                        onChange={(e) => setConsentChecked(e.target.checked)}
+                        className="mt-0.5 h-4 h-4 w-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500 cursor-pointer accent-brand-600 flex-shrink-0"
+                      />
+                      <label htmlFor="modalConsent" className="text-[11px] text-slate-600 leading-tight cursor-pointer select-none">
+                        I agree to the <Link href="/privacy" target="_blank" className="text-brand-600 hover:underline font-bold">Privacy Policy</Link> and consent to Ahmad Web Works contacting me via phone, WhatsApp, SMS, or email.
+                      </label>
+                    </div>
+                    {errorMessage && (
+                      <p className="text-[11px] text-rose-600 font-semibold pt-1 flex items-center gap-1">
+                        <FaExclamationCircle className="flex-shrink-0" />
+                        <span>{errorMessage}</span>
+                      </p>
+                    )}
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 rounded-xl shadow-button flex items-center justify-center gap-2 text-sm transition-all"
+                    disabled={!consentChecked}
+                    className="w-full bg-brand-600 hover:bg-brand-700 text-white font-extrabold py-4 px-6 rounded-2xl shadow-button hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5 flex items-center justify-center gap-2 text-base disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                   >
-                    <FaWhatsapp className="text-lg" />
+                    <FaPaperPlane className="text-sm" />
                     <span>Get a Free Quote & Audit</span>
                   </button>
 
@@ -137,3 +170,4 @@ export const AuditModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
     </AnimatePresence>
   );
 };
+

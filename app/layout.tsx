@@ -51,6 +51,10 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: siteConfig.baseUrl,
+  },
+  icons: {
+    icon: '/logo.png',
+    apple: '/logo.png',
   }
 };
 

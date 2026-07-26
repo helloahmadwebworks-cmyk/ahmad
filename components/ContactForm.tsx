@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { FaWhatsapp, FaPaperPlane, FaCheckCircle, FaExclamationCircle } from 'react-icons/fa';
 import { siteConfig, mainServices } from '@/data/siteData';
 
@@ -15,6 +16,7 @@ export const ContactForm: React.FC = () => {
     message: ''
   });
 
+  const [consentChecked, setConsentChecked] = useState(false);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -24,6 +26,11 @@ export const ContactForm: React.FC = () => {
 
   const handleWeb3Submit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!consentChecked) {
+      setErrorMessage('Please consent to the Privacy Policy to submit your inquiry.');
+      return;
+    }
+
     setStatus('submitting');
     setErrorMessage('');
 
@@ -39,7 +46,8 @@ export const ContactForm: React.FC = () => {
         email: formData.email || 'Not Provided',
         service: selectedServiceTitle,
         city: formData.city || 'Not Specified',
-        message: formData.message || 'No additional message provided.'
+        message: formData.message || 'No additional message provided.',
+        consent: 'Agreed to Privacy Policy & Direct Communication'
       };
 
       const res = await fetch('https://api.web3forms.com/submit', {
@@ -86,7 +94,7 @@ export const ContactForm: React.FC = () => {
           <div className="pt-4 space-y-3">
             <button
               onClick={triggerDirectWhatsApp}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-8 py-3.5 rounded-2xl shadow-button text-sm"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-8 py-4 rounded-2xl shadow-button hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5 text-sm"
             >
               <FaWhatsapp className="text-xl" />
               <span>Connect Direct on WhatsApp (+91 9084326728)</span>
@@ -101,8 +109,8 @@ export const ContactForm: React.FC = () => {
           <input type="hidden" name="subject" value={`New Lead - ${formData.name}`} />
 
           <div className="border-b border-slate-100 pb-4">
-            <h3 className="text-xl font-bold text-slate-900">Request a Free Quote & Consultation</h3>
-            <p className="text-slate-500 text-xs mt-1">Direct response from founder Mohd Ahmad. Zero spam.</p>
+            <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900">Request a Free Quote & Consultation</h3>
+            <p className="text-slate-500 text-xs sm:text-sm mt-1">Direct 1-on-1 response from founder Mohd Ahmad. Zero spam.</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -124,7 +132,7 @@ export const ContactForm: React.FC = () => {
 
             <div>
               <label htmlFor="phone" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
-                WhatsApp Number <span className="text-brand-600">*</span>
+                WhatsApp / Phone <span className="text-brand-600">*</span>
               </label>
               <input
                 type="tel"
@@ -211,22 +219,47 @@ export const ContactForm: React.FC = () => {
             />
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3 pt-2">
+          {/* MANDATORY PRIVACY CONSENT CHECKBOX */}
+          <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200/90 space-y-1">
+            <div className="flex items-start gap-3">
+              <input
+                type="checkbox"
+                id="consentCheck"
+                name="consentCheck"
+                required
+                checked={consentChecked}
+                onChange={(e) => setConsentChecked(e.target.checked)}
+                className="mt-1 h-4 h-4 w-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500 cursor-pointer accent-brand-600 flex-shrink-0"
+              />
+              <label htmlFor="consentCheck" className="text-xs text-slate-600 leading-relaxed cursor-pointer select-none">
+                I agree to the <Link href="/privacy" target="_blank" className="text-brand-600 hover:underline font-bold">Privacy Policy</Link> and consent to Ahmad Web Works contacting me via phone, WhatsApp, SMS, or email regarding my inquiry.
+              </label>
+            </div>
+            {errorMessage && (
+              <p className="text-xs text-rose-600 font-semibold pt-1 flex items-center gap-1">
+                <FaExclamationCircle className="flex-shrink-0" />
+                <span>{errorMessage}</span>
+              </p>
+            )}
+          </div>
+
+          {/* PRIMARY BUTTONS WITH BRAND BLUE DEFAULT STYLING */}
+          <div className="flex flex-col sm:flex-row gap-3 pt-1">
             <button
               type="submit"
-              disabled={status === 'submitting'}
-              className="flex-1 bg-brand-600 hover:bg-brand-700 text-white font-extrabold py-4 rounded-2xl shadow-button hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 text-sm disabled:opacity-50"
+              disabled={status === 'submitting' || !consentChecked}
+              className="flex-1 bg-brand-600 hover:bg-brand-700 text-white font-bold py-4 px-8 rounded-2xl shadow-button hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5 flex items-center justify-center gap-2 text-base disabled:opacity-75 disabled:cursor-not-allowed disabled:transform-none"
             >
               <FaPaperPlane className="text-sm" />
-              <span>{status === 'submitting' ? 'Submitting...' : 'Get a Free Quote'}</span>
+              <span>{status === 'submitting' ? 'Submitting Inquiry...' : 'Get a Free Quote'}</span>
             </button>
 
             <button
               type="button"
               onClick={triggerDirectWhatsApp}
-              className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-6 py-4 rounded-2xl shadow-button flex items-center justify-center gap-2 text-sm"
+              className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-6 py-4 rounded-2xl shadow-button hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5 flex items-center justify-center gap-2 text-sm"
             >
-              <FaWhatsapp className="text-lg" />
+              <FaWhatsapp className="text-xl" />
               <span>WhatsApp Direct</span>
             </button>
           </div>
@@ -239,3 +272,4 @@ export const ContactForm: React.FC = () => {
     </div>
   );
 };
+

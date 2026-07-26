@@ -10,13 +10,12 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-800">
           {/* Column 1: Brand Info */}
           <div className="lg:col-span-2 space-y-4">
-            <Link href="/" className="flex items-center gap-2.5">
-              <div className="w-10 h-10 rounded-xl bg-brand-600 flex items-center justify-center text-white font-bold text-xl">
-                A
-              </div>
-              <span className="font-extrabold text-white text-xl tracking-tight">
-                Ahmad Web Works<span className="text-brand-500">.</span>
-              </span>
+            <Link href="/" className="flex items-center group">
+              <img
+                src="/logo.png"
+                alt="Ahmad Web Works Logo"
+                className="h-12 w-auto object-contain bg-white rounded-xl p-1.5 shadow-md transition-transform duration-200 group-hover:scale-105"
+              />
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed max-w-md">
               Ahmad Web Works by <strong className="text-slate-200">Mohd Ahmad</strong> is a premier freelance web development, SEO, and digital marketing studio in India. We craft fast-loading, mobile-friendly websites, Shopify stores, and ad campaigns designed to convert visitors into loyal clients.
@@ -108,6 +107,9 @@ export const Footer: React.FC = () => {
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <p>© {new Date().getFullYear()} Ahmad Web Works. All rights reserved. Founded by Mohd Ahmad.</p>
           <div className="flex flex-wrap items-center gap-6">
+            <Link href="/privacy" className="hover:text-slate-300 transition-colors font-medium text-slate-400">
+              Privacy Policy
+            </Link>
             <span>Direct WhatsApp: +91 9084326728</span>
             <a href={`mailto:${siteConfig.email}`} className="hover:text-slate-300 transition-colors">
               {siteConfig.email}

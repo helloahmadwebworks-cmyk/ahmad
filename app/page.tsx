@@ -64,7 +64,7 @@ export default function HomePage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.12]"
+                className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight leading-[1.12]"
               >
                 Your Business Deserves a Website That <span className="text-gradient-blue">Actually Works</span>
               </motion.h1>
@@ -103,9 +103,9 @@ export default function HomePage() {
 
                 <Link
                   href="/contact"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-slate-900 border border-slate-200 font-bold text-base px-8 py-4 rounded-2xl shadow-subtle hover:border-slate-300 transition-all duration-200"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-extrabold text-base px-8 py-4 rounded-2xl shadow-button hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5"
                 >
-                  <span>Request Fixed Quote</span>
+                  <span>Get a Free Quote</span>
                 </Link>
               </motion.div>
 
@@ -405,7 +405,7 @@ export default function HomePage() {
             <span className="text-xs font-bold uppercase tracking-wider text-brand-600 bg-brand-50 px-3.5 py-1.5 rounded-full border border-brand-200">
               Get Started
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">
               Ready to Turn Your Website Into a Lead Engine?
             </h2>
             <p className="text-slate-600 text-base leading-relaxed">
@@ -440,7 +440,7 @@ export default function HomePage() {
           <span className="text-xs font-bold uppercase tracking-wider text-brand-600 bg-brand-50 px-3.5 py-1.5 rounded-full border border-brand-200">
             Got Questions?
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">
             Frequently Asked Questions
           </h2>
           <p className="text-slate-600 text-base">
@@ -455,7 +455,7 @@ export default function HomePage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-gradient-to-tr from-brand-700 via-brand-600 to-blue-600 rounded-3xl p-8 sm:p-12 lg:p-16 text-white text-center shadow-card-hover space-y-6 relative overflow-hidden">
           <div className="relative z-10 max-w-3xl mx-auto space-y-6">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
               Ready to Take Your Business Online? Let's Talk.
             </h2>
             <p className="text-blue-100 text-base sm:text-lg leading-relaxed">

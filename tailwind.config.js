@@ -15,7 +15,7 @@ module.exports = {
           300: '#93c5fd',
           400: '#60a5fa',
           500: '#3b82f6',
-          60: '#2563eb', // Primary Accent
+          600: '#2563eb', // Primary Accent
           700: '#1d4ed8',
           800: '#1e40af',
           900: '#1e3a8a',

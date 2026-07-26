@@ -29,6 +29,23 @@ export default function PortfolioPage() {
           <p className="text-lg text-slate-600 leading-relaxed">
             Every website and digital strategy built by Mohd Ahmad is measured by real business outcomes — Google rankings, sub-3s speeds, and qualified customer leads.
           </p>
+          <div className="pt-4 flex flex-wrap gap-4">
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2.5 bg-brand-600 hover:bg-brand-700 text-white font-extrabold text-base px-8 py-4 rounded-2xl shadow-button hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5"
+            >
+              <span>Get a Free Quote</span>
+            </Link>
+            <a
+              href={`https://wa.me/${siteConfig.whatsappNumber}?text=Hi%20Mohd%20Ahmad,%20I%20want%20to%20discuss%20my%20website%20project.`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-base px-8 py-4 rounded-2xl shadow-button hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5"
+            >
+              <FaWhatsapp className="w-5 h-5" />
+              <span>WhatsApp Direct (+91 9084326728)</span>
+            </a>
+          </div>
         </div>
       </section>
 
@@ -97,15 +114,23 @@ export default function PortfolioPage() {
         <p className="text-slate-400 text-sm max-w-2xl mx-auto leading-relaxed">
           Let's discuss your business requirements directly with Mohd Ahmad. Get a transparent quote and strategy roadmap.
         </p>
-        <a
-          href={`https://wa.me/${siteConfig.whatsappNumber}?text=Hi%20Mohd%20Ahmad,%20I%20want%20to%20discuss%20my%20website%20project.`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-base px-8 py-4 rounded-2xl shadow-button"
-        >
-          <FaWhatsapp className="w-5 h-5" />
-          <span>Discuss on WhatsApp (+91 9084326728)</span>
-        </a>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+          <Link
+            href="/contact"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-brand-600 hover:bg-brand-700 text-white font-extrabold text-base px-8 py-4 rounded-2xl shadow-button hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5"
+          >
+            <span>Get a Free Quote</span>
+          </Link>
+          <a
+            href={`https://wa.me/${siteConfig.whatsappNumber}?text=Hi%20Mohd%20Ahmad,%20I%20want%20to%20discuss%20my%20website%20project.`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-base px-8 py-4 rounded-2xl shadow-button hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5"
+          >
+            <FaWhatsapp className="w-5 h-5" />
+            <span>Discuss on WhatsApp</span>
+          </a>
+        </div>
       </section>
     </div>
   );
