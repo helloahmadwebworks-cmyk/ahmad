@@ -207,6 +207,14 @@ export const Header: React.FC = () => {
               </div>
 
               <Link
+                href="/#audit-calculator"
+                className="px-3.5 py-2 rounded-xl transition-colors hover:text-brand-600 hover:bg-slate-50 text-brand-600 font-bold flex items-center gap-1"
+              >
+                <HiOutlineSparkles className="w-4 h-4 text-brand-600" />
+                <span>Audit Tool</span>
+              </Link>
+
+              <Link
                 href="/portfolio"
                 className={`px-3.5 py-2 rounded-xl transition-colors ${
                   pathname === '/portfolio' ? 'text-brand-600 bg-brand-50' : 'hover:text-brand-600 hover:bg-slate-50'

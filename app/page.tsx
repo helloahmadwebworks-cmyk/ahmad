@@ -25,6 +25,7 @@ import { FaqAccordion } from '@/components/FaqAccordion';
 import { PageSpeedCardGraphic, GmbMapGraphic, SeoCodeSnippetGraphic } from '@/components/VisualGraphics';
 import { TopicalAuthorityHub } from '@/components/TopicalAuthorityHub';
 import { ContactForm } from '@/components/ContactForm';
+import { SeoSpeedCalculator } from '@/components/SeoSpeedCalculator';
 
 const iconMap: Record<string, React.ReactNode> = {
   HiOutlineCode: <HiCodeBracket className="w-7 h-7 text-brand-600" />,
@@ -205,6 +206,9 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+
+      {/* INTERACTIVE SPEED & SEO AUDIT TOOL */}
+      <SeoSpeedCalculator />
 
       {/* WHY CHOOSE AHMAD WEB WORKS */}
       <section className="bg-slate-50/80 py-24 border-y border-slate-200/80">
