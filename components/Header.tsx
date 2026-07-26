@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiOutlineMenu, HiOutlineX, HiOutlineChevronDown, HiOutlineSparkles } from 'react-icons/hi';
 import { FaWhatsapp } from 'react-icons/fa';
-import { siteConfig, mainServices, citiesList, industriesList } from '@/data/siteData';
+import { siteConfig, mainServices, citiesList, industriesList, freeToolsList } from '@/data/siteData';
 import { AuditModal } from '@/components/AuditModal';
 
 export const Header: React.FC = () => {
@@ -206,13 +206,78 @@ export const Header: React.FC = () => {
                 </AnimatePresence>
               </div>
 
-              <Link
-                href="/#audit-calculator"
-                className="px-3.5 py-2 rounded-xl transition-colors hover:text-brand-600 hover:bg-slate-50 text-brand-600 font-bold flex items-center gap-1"
+              {/* Tools Dropdown */}
+              <div
+                className="relative"
+                onMouseEnter={() => setActiveDropdown('tools')}
+                onMouseLeave={() => setActiveDropdown(null)}
               >
-                <HiOutlineSparkles className="w-4 h-4 text-brand-600" />
-                <span>Audit Tool</span>
-              </Link>
+                <button
+                  onClick={() => toggleDropdown('tools')}
+                  className={`flex items-center gap-1 px-3.5 py-2 rounded-xl transition-colors ${
+                    pathname.includes('/tools')
+                      ? 'text-brand-600 bg-brand-50 font-bold'
+                      : 'hover:text-brand-600 hover:bg-slate-50 font-semibold'
+                  }`}
+                >
+                  <HiOutlineSparkles className="w-4 h-4 text-brand-600" />
+                  <span>Tools</span> <HiOutlineChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === 'tools' ? 'rotate-180 text-brand-600' : ''}`} />
+                </button>
+
+                <AnimatePresence>
+                  {activeDropdown === 'tools' && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 8 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute left-0 mt-1 w-80 bg-white rounded-2xl shadow-card-hover border border-slate-200 p-3 z-50"
+                    >
+                      <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider px-3 py-1 mb-1 flex items-center justify-between">
+                        <span>Free Interactive Tools</span>
+                        <Link href="/tools" className="text-brand-600 hover:underline">View All →</Link>
+                      </div>
+                      {freeToolsList.map((tool) => (
+                        tool.isAvailable ? (
+                          <Link
+                            key={tool.id}
+                            href={`/${tool.slug}`}
+                            className="block px-3 py-2.5 rounded-xl hover:bg-brand-50 transition-colors group"
+                          >
+                            <div className="flex items-center justify-between">
+                              <div className="text-slate-900 font-bold text-sm group-hover:text-brand-600">
+                                {tool.title}
+                              </div>
+                              {tool.badge && (
+                                <span className="text-[10px] font-extrabold bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">
+                                  {tool.badge}
+                                </span>
+                              )}
+                            </div>
+                            <p className="text-xs text-slate-500 line-clamp-1 mt-0.5 font-normal">
+                              {tool.shortDesc}
+                            </p>
+                          </Link>
+                        ) : (
+                          <div key={tool.id} className="px-3 py-2 rounded-xl opacity-60">
+                            <div className="flex items-center justify-between">
+                              <div className="text-slate-700 font-bold text-xs">
+                                {tool.title}
+                              </div>
+                              <span className="text-[9px] font-bold bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full">
+                                {tool.badge}
+                              </span>
+                            </div>
+                            <p className="text-[11px] text-slate-400 line-clamp-1 mt-0.5 font-normal">
+                              {tool.shortDesc}
+                            </p>
+                          </div>
+                        )
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
 
               <Link
                 href="/portfolio"

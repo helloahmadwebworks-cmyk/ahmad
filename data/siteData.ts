@@ -5,6 +5,15 @@ export interface PageMeta {
   h1: string;
 }
 
+export interface ToolItem {
+  id: string;
+  slug: string;
+  title: string;
+  shortDesc: string;
+  badge?: string;
+  isAvailable: boolean;
+}
+
 export interface ProcessStep {
   step: string;
   title: string;
@@ -1458,5 +1467,32 @@ export const globalFaqs = [
   {
     question: "Why should I work with Mohd Ahmad instead of an agency?",
     answer: "When you choose Ahmad Web Works, you work directly with founder Mohd Ahmad — no project managers, no junior hand-offs, and no agency overhead costs. You get senior expertise, direct WhatsApp updates, and faster execution."
+  }
+];
+
+export const freeToolsList: ToolItem[] = [
+  {
+    id: 'website-speed-seo-calculator',
+    slug: 'tools/website-speed-seo-calculator',
+    title: 'Website Speed & SEO Scanner',
+    shortDesc: 'Instant audit score, Core Web Vitals breakdown, and lead loss calculation.',
+    badge: 'Live',
+    isAvailable: true,
+  },
+  {
+    id: 'local-seo-checker',
+    slug: 'tools/local-seo-checker',
+    title: 'Google Maps & Local SEO Checker',
+    shortDesc: 'Analyzes GMB profile ranking and local competitor visibility in your city.',
+    badge: 'Coming Soon',
+    isAvailable: false,
+  },
+  {
+    id: 'website-cost-estimator',
+    slug: 'tools/website-cost-estimator',
+    title: 'Website Development Cost Estimator',
+    shortDesc: 'Calculates instant project scope, timeline, and investment quote.',
+    badge: 'Coming Soon',
+    isAvailable: false,
   }
 ];

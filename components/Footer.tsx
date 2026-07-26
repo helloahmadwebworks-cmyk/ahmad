@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { FaWhatsapp, FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
-import { siteConfig, mainServices, citiesList, industriesList } from '@/data/siteData';
+import { siteConfig, mainServices, citiesList, industriesList, freeToolsList } from '@/data/siteData';
 
 export const Footer: React.FC = () => {
   return (
@@ -84,6 +84,17 @@ export const Footer: React.FC = () => {
                 </li>
               ))}
               <li className="pt-2 border-t border-slate-800">
+                <Link href="/tools" className="hover:text-brand-400 font-bold text-brand-400 flex items-center gap-1">
+                  <span>Free Client Tools</span>
+                  <span>→</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/tools/website-speed-seo-calculator" className="hover:text-white transition-colors">
+                  Website Speed &amp; SEO Scanner
+                </Link>
+              </li>
+              <li>
                 <Link href="/about" className="hover:text-white font-medium text-slate-300">
                   About Mohd Ahmad
                 </Link>
